@@ -1,0 +1,124 @@
+{
+	"scenes": [
+		{
+			"nodes": [ 0 ]
+		}
+	],
+	"nodes": [
+		{
+			"mesh": 0,
+			"rotation": [ -0.70699999999999996, 0, 0, 0.70699999999999996 ]
+		}
+	],
+	"meshes": [
+		{
+			"primitives": [
+				{
+					"attributes": {
+						"POSITION": 1,
+						"NORMAL": 2,
+						"COLOR_0": 3,
+						"_BATCHID": 4
+					},
+					"indices": 0,
+					"material": 0
+				}
+			]
+		}
+	],
+	"buffers": [
+		{
+			"uri": "Cluster1.b3dm.bin",
+			"byteLength": 912
+		}
+	],
+	"bufferViews": [
+		{
+			"buffer": 0,
+			"byteOffset": 0,
+			"byteLength": 144,
+			"target": 34963
+		},
+		{
+			"buffer": 0,
+			"byteOffset": 144,
+			"byteLength": 288,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteOffset": 432,
+			"byteLength": 288,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteOffset": 720,
+			"byteLength": 96,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteOffset": 816,
+			"byteLength": 96,
+			"byteStride": 4,
+			"target": 34962
+		}
+	],
+	"accessors": [
+		{
+			"bufferView": 0,
+			"byteOffset": 0,
+			"componentType": 5125,
+			"count": 36,
+			"type": "SCALAR",
+			"min": [ 0 ],
+			"max": [ 23 ]
+		},
+		{
+			"bufferView": 1,
+			"byteOffset": 0,
+			"componentType": 5126,
+			"count": 24,
+			"type": "VEC3",
+			"min": [ -6.24349928, 9.97037125, 0 ],
+			"max": [ -5.95349932, 10.2603712, 8 ]
+		},
+		{
+			"bufferView": 2,
+			"byteOffset": 0,
+			"componentType": 5126,
+			"count": 24,
+			"type": "VEC3",
+			"min": [ -1, -1, -1 ],
+			"max": [ 1, 1, 1 ]
+		},
+		{
+			"bufferView": 3,
+			"byteOffset": 0,
+			"componentType": 5121,
+			"count": 24,
+			"type": "VEC4",
+			"normalized": true,
+			"min": [ 170, 99, 105, 255 ],
+			"max": [ 170, 99, 105, 255 ]
+		},
+		{
+			"bufferView": 4,
+			"byteOffset": 0,
+			"componentType": 5123,
+			"count": 24,
+			"type": "SCALAR",
+			"min": [ 0 ],
+			"max": [ 0 ]
+		}
+	],
+	"materials": [
+		{
+			"doubleSided": true
+		}
+	],
+	"asset": {
+		"version": "2.0"
+	}
+}

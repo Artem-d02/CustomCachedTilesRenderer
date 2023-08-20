@@ -1,0 +1,78 @@
+{
+	"asset": {
+		"version": "1.0"
+	},
+	"extensionsUsed": [ "HDLOD_presenceFunction", "HDLOD_errorFunction" ],
+	"extensionsRequired": [ "HDLOD_presenceFunction", "HDLOD_errorFunction" ],
+	"geometricError": 0.33227520596637944,
+	"root": {
+		"boundingVolume": {
+			"box": [ -3.1759991178904023, 0.61537086863242507, 4, 12.922499999999999, 0, 0, 0, 9.6449999999999836, 0, 0, 0, 4 ]
+		},
+		"content": {
+			"uri": "Cluster7.b3dm"
+		},
+		"refine": "REPLACE",
+		"geometricError": 0.33227520596637944,
+		"children": [
+			{
+				"boundingVolume": {
+					"box": [ -3.1759991178904023, 0.61537086863242507, 4, 12.922499999999999, 0, 0, 0, 9.6449999999999836, 0, 0, 0, 4 ]
+				},
+				"content": {
+					"uri": "Cluster6.b3dm"
+				},
+				"geometricError": 0.33227520596637944,
+				"children": [
+					{
+						"boundingVolume": {
+							"box": [ 1.6065008821096001, 10.115370868632404, 4, 7.8499999999999996, 0, 0, 0, 0.1450000000000049, 0, 0, 0, 4 ]
+						},
+						"content": {
+							"uri": "Cluster5.b3dm"
+						},
+						"geometricError": 0.17623112664906845,
+						"children": [
+							{
+								"boundingVolume": {
+									"box": [ -3.1217495589451998, 10.115370868632409, 4, 3.1217495589451998, 0, 0, 0, 0.14499999999999957, 0, 0, 0, 4 ]
+								},
+								"content": {
+									"uri": "Cluster1.b3dm"
+								},
+								"geometricError": 0
+							},
+							{
+								"boundingVolume": {
+									"box": [ 1.7515008821095996, 10.1153708686324, 4, 7.7050000000000001, 0, 0, 0, 0.14499999999999957, 0, 0, 0, 4 ]
+								},
+								"content": {
+									"uri": "Cluster2.b3dm"
+								},
+								"geometricError": 0
+							}
+						]
+					},
+					{
+						"boundingVolume": {
+							"box": [ -3.1759991178904023, -4.5148145656837793, 4, 12.922499999999999, 0, 0, 0, 4.5148145656837793, 0, 0, 0, 4 ]
+						},
+						"content": {
+							"uri": "Cluster3.b3dm"
+						},
+						"geometricError": 0
+					},
+					{
+						"boundingVolume": {
+							"box": [ 9.6015008821095709, 0.7603708686323607, 4, 0.14499999999999957, 0, 0, 0, 9.5, 0, 0, 0, 4 ]
+						},
+						"content": {
+							"uri": "Cluster4.b3dm"
+						},
+						"geometricError": 0
+					}
+				]
+			}
+		]
+	}
+}

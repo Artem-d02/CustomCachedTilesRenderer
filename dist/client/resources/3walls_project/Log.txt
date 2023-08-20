@@ -1,0 +1,62 @@
+Scene has 4 static, 0 pseudo-dynamic, 0 dynamic meshes
+Scene coherence: 1 (calculated in 8.19e-05s)
+Clusterization time: 0.0002244 seconds
+Clusterization time: 8.41e-05 seconds
+
+HDLOD generated. Parameters:
+0.01 relative error
+2 dimension progression common ratio
+50 max cluster size
+0 fan processing passes
+0 k-means iterations
+0 color clusters
+
+Statistics:
+0.0334982s generation time
+0.0002023s function simplification time
+0.0385975s export time
+0.0008784s total clusterization time
+0.0320836s total cluster processing time
+0.0306622s total merge time
+Triangles: 94 -> 68 (0.723404)
+0 root node presence function keys
+0 root node error function keys
+
+Detailed statistics:
+Total node count: 7, cluster count: 3, level count: 4, average cluster fill ratio: 0.04
+Level 0 triangle count: 22
+Level 1 triangle count: 22
+Level 2 triangle count: 48
+Level 3 triangle count: 24
+Total triangle count: 116 = 68 (clusters) + 48 (original meshes)
+Scene has 4 static, 0 pseudo-dynamic, 0 dynamic meshes
+Scene coherence: 1 (calculated in 9.31e-05s)
+Clusterization time: 0.0001277 seconds
+Clusterization time: 7.93e-05 seconds
+
+HDLOD generated. Parameters:
+0.01 relative error
+2 dimension progression common ratio
+50 max cluster size
+0 fan processing passes
+0 k-means iterations
+0 color clusters
+
+Statistics:
+0.0255631s generation time
+0.0001065s function simplification time
+0.0329158s export time
+0.0005796s total clusterization time
+0.0246102s total cluster processing time
+0.023561s total merge time
+Triangles: 88 -> 56 (0.636364)
+0 root node presence function keys
+0 root node error function keys
+
+Detailed statistics:
+Total node count: 7, cluster count: 3, level count: 4, average cluster fill ratio: 0.04
+Level 0 triangle count: 16
+Level 1 triangle count: 16
+Level 2 triangle count: 48
+Level 3 triangle count: 24
+Total triangle count: 104 = 56 (clusters) + 48 (original meshes)
