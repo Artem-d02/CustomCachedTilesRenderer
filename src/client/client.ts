@@ -2,6 +2,7 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { TilesRenderer } from '3d-tiles-renderer'
 import { Tile } from '3d-tiles-renderer/src/base/Tile'
+import test from './MyClasses.ts/Test'
 
 const scene = new THREE.Scene()
 
@@ -76,3 +77,4 @@ function render() {
     renderer.render(scene, camera)
 }
 animate()
+test()
