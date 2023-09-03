@@ -1,5 +1,17 @@
 import { TreeNode, Tree } from './Tree'
 
+class Tile {
+    parent: Tile | undefined
+    value: number
+    children: Tile[] = []
+
+    constructor(parent: Tile | undefined, value: number, children: Tile[]) {
+        this.parent = parent
+        this.value = value
+        this.children = children
+    }
+}
+
 export default function test() {
     const tree = new Tree((a: number, b: number) => {
         return <number>(a - b)

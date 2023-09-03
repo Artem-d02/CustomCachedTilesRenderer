@@ -26,7 +26,7 @@ export class TreeNode<T> {
 
 // Note: Tree can store only unique values (define the comparator function attentively!)
 export class Tree<T> {
-    private root?: TreeNode<T>
+    private _root?: TreeNode<T>
     private comparator: (first: T, second: T) => number //  should return 0 for equals object and non-0 for others
     private _size: number = 0
 
@@ -36,8 +36,8 @@ export class Tree<T> {
 
     public insert(element: T, parent: T | null): void {
         if (!parent) {
-            if (!this.root) {
-                this.root = new TreeNode(element)
+            if (!this._root) {
+                this._root = new TreeNode(element)
                 this._size++
                 return
             } else {
@@ -57,10 +57,10 @@ export class Tree<T> {
     }
 
     public search(element: T): TreeNode<T> | undefined {
-        if (!this.root) {
+        if (!this._root) {
             return
         }
-        return this.recursivelySearch(element, this.root)
+        return this.recursivelySearch(element, this._root)
     }
 
     public has(element: T): Boolean {
@@ -83,16 +83,57 @@ export class Tree<T> {
         }
         countChildrenRecursively(resultNode)
 
+        //  Dispose all successors
+        this.traverseAllChildren(element, removeCb)
+
+        //  Fix parent node if it exists
         const parentNode = resultNode.parent
-        const index = parentNode?.children.indexOf(resultNode)
-        parentNode?.children.splice(<number>index, 1)
+        if (parentNode !== null) {
+            const index = parentNode?.children.indexOf(resultNode)
+            parentNode?.children.splice(<number>index, 1)
+        }
+
         removeCb(resultNode.data)
         this._size -= childrenNumber
         return true
     }
 
+    removeIfIsLeaf(element: T, removeCb: (elem: T) => void = (elem) => {}) {
+        const resultNode = this.search(element)
+        if (resultNode === undefined) {
+            return false
+        }
+
+        if (resultNode.children.length === 0) {
+            return this.removeSubTree(element, removeCb)
+        }
+    }
+
     get size(): number {
         return this._size
+    }
+
+    get root(): TreeNode<T> | undefined {
+        return this._root
+    }
+
+    public traverseAllChildren(element: T, callback: (elem: T) => void): Boolean {
+        const startNode = this.search(element)
+        if (startNode === undefined) {
+            return false
+        }
+        this.traverseAllChildrenRecursively(startNode, callback)
+        return true
+    }
+
+    public traverseAllChildrenRecursively(
+        startNode: TreeNode<T>,
+        callback: (elem: T) => void
+    ): void {
+        callback(startNode.data)
+        for (const child of startNode.children) {
+            this.traverseAllChildrenRecursively(child, callback)
+        }
     }
 
     //  private api
