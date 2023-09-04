@@ -71,7 +71,11 @@ export class TreeCache<T> {
         }
         wrappedItem.isUsed = true
         this.usedCount++
-        this.itemTree.insert(wrappedItem, new ItemWrapper(item.parent))
+        if (item.parent !== undefined && item.parent !== null) {
+            this.itemTree.insert(wrappedItem, new ItemWrapper(item.parent))
+        } else {
+            this.itemTree.insert(wrappedItem, null)
+        }
         this.callbacks.set(item, removeCb)
         return true
     }
@@ -160,6 +164,12 @@ export class TreeCache<T> {
                 if (childNode.data.isUsed === true) {
                     childNode.data.isUsed = false
                     this.usedCount--
+                    this.itemTree.traverseAllChildren(childNode.data, (elem) => {
+                        if (elem.isUsed === true) {
+                            elem.isUsed = false
+                            this.usedCount--
+                        }
+                    })
                 }
             }
         }
@@ -193,7 +203,10 @@ export class TreeCache<T> {
         nodesToUnload = Math.ceil(nodesToUnload)
 
         let unloadItemsNumber = 0
-        while (unloadItemsNumber < nodesToUnload || this.itemTree.size - this.usedCount) {
+        while (unloadItemsNumber < nodesToUnload) {
+            if (this.itemTree.size === this.usedCount) {
+                break
+            }
             this.itemTree.traverseAllChildren(
                 this.itemTree.root?.data as ItemWrapper<T>,
                 (elem: ItemWrapper<T>) => {
