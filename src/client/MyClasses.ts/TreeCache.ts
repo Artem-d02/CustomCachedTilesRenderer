@@ -38,6 +38,8 @@ export class TreeCache<T> {
 
     usedCount: number = 0
 
+    scheduled: Boolean = false
+
     constructor(
         comparator: (first: T, second: T) => number,
         maxSize: number = Consts.DEFAULT_MAX_SIZE,
@@ -202,6 +204,7 @@ export class TreeCache<T> {
         let nodesToUnload = Math.min(maxUnload, unused)
         nodesToUnload = Math.ceil(nodesToUnload)
 
+        //  TODO: make this strategy more... sophisticated (check the state of cache)
         let unloadItemsNumber = 0
         while (unloadItemsNumber < nodesToUnload) {
             if (this.itemTree.size === this.usedCount) {
@@ -224,6 +227,19 @@ export class TreeCache<T> {
                     }
                 }
             )
+        }
+    }
+
+    public scheduleUnload(markAllUnused = true) {
+        if (!this.scheduled) {
+            this.scheduled = true
+            enqueueMicrotask(() => {
+                this.scheduled = false
+                this.unloadUnusedContent()
+                if (markAllUnused) {
+                    this.markAllUnused()
+                }
+            })
         }
     }
 }
