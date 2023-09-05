@@ -15,8 +15,10 @@ function enqueueMicrotask(callback: any) {
 class ItemWrapper<T> {
     private _item: T
     private _isUsed: Boolean = false
+    private _lastUsed: number
     constructor(item: T) {
         this._item = item
+        this._lastUsed = Date.now()
     }
     get item(): T {
         return this._item
@@ -24,8 +26,14 @@ class ItemWrapper<T> {
     get isUsed(): Boolean {
         return this._isUsed
     }
+    get lastUsed(): number {
+        return this._lastUsed
+    }
     set isUsed(isUsed: Boolean) {
         this._isUsed = isUsed
+    }
+    set lastUsed(lastUsed: number) {
+        this._lastUsed = lastUsed
     }
 }
 
@@ -111,6 +119,7 @@ export class TreeCache<T> {
                 foundItemWrapped.isUsed = true
                 this.usedCount++
             }
+            foundItemWrapped.lastUsed = Date.now()
 
             // If this node is root - return
             if (foundNode.parent === null) {
@@ -124,6 +133,7 @@ export class TreeCache<T> {
                     parentNode.data.isUsed = true
                     this.usedCount++
                 }
+                parentNode.data.lastUsed = Date.now()
                 parentNode = parentNode.parent
             }
         }
@@ -183,23 +193,43 @@ export class TreeCache<T> {
             if (this.itemTree.size === this.usedCount) {
                 break
             }
+            type Pair = {
+                wrappedItem: ItemWrapper<T>
+                lastUsed: number
+            }
+            const unusedItemSet: Pair[] = []
             this.itemTree.traverseAllChildren(
                 this.itemTree.root?.data as ItemWrapper<T>,
-                (elem: ItemWrapper<T>) => {
-                    if (elem.isUsed === false && unloadItemsNumber < nodesToUnload) {
-                        if (
-                            this.itemTree.removeIfIsLeaf(elem, (wrappedElem) => {
-                                const removeCb = callbacks.get(wrappedElem.item) as (
-                                    elem: T
-                                ) => void
-                                removeCb(wrappedElem.item)
-                            })
-                        ) {
-                            unloadItemsNumber++
-                        }
+                (wrapper) => {
+                    //  If element is a leaf add it to the list of possible removable object
+                    if (this.itemTree.isLeaf(wrapper) && wrapper.isUsed === false) {
+                        unusedItemSet.push({
+                            wrappedItem: wrapper,
+                            lastUsed: wrapper.lastUsed,
+                        })
                     }
                 }
             )
+            unusedItemSet.sort((a: Pair, b: Pair) => {
+                return a.lastUsed - b.lastUsed
+            })
+            let index = 0
+            while (unloadItemsNumber < nodesToUnload) {
+                //  If all elements in unusedItemSet were deleted - go to the next outer iteration
+                if (index === unusedItemSet.length) {
+                    break
+                }
+                const elemInTree = unusedItemSet[index++].wrappedItem
+                const rmCb = callbacks.get(elemInTree.item) as (elem: T) => void
+                if (
+                    this.itemTree.removeIfIsLeaf(elemInTree, (wrappedItem) =>
+                        rmCb(wrappedItem.item)
+                    )
+                ) {
+                    unloadItemsNumber++
+                }
+                callbacks.delete(elemInTree.item)
+            }
         }
     }
 

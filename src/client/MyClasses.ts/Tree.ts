@@ -98,15 +98,19 @@ export class Tree<T> {
         return true
     }
 
-    removeIfIsLeaf(element: T, removeCb: (elem: T) => void = (elem) => {}) {
+    public removeIfIsLeaf(element: T, removeCb: (elem: T) => void = (elem) => {}): Boolean {
+        if (this.isLeaf(element)) {
+            return this.removeSubTree(element, removeCb)
+        }
+        return false
+    }
+
+    public isLeaf(element: T): Boolean {
         const resultNode = this.search(element)
         if (resultNode === undefined) {
             return false
         }
-
-        if (resultNode.children.length === 0) {
-            return this.removeSubTree(element, removeCb)
-        }
+        return resultNode.children.length === 0
     }
 
     get size(): number {

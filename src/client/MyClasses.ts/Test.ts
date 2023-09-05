@@ -61,7 +61,7 @@ export default function test() {
     console.log(root)
 
     //  Cache test
-    const cache = new TreeCache((first: Tile, second: Tile) => first.value - second.value, 13, 9, 1)
+    const cache = new TreeCache((first: Tile, second: Tile) => first.value - second.value, 13, 5, 1)
     const traverseAllChildren = (root: Tile, cb: (tile: Tile) => void) => {
         cb(root)
         for (const child of root.children) {
@@ -74,7 +74,9 @@ export default function test() {
     cache.markUnused(root.children[0])
     console.log('Cache after mark unused:')
     console.log(cache)
-    cache.unloadUnusedContent()
-    console.log('Cache after clear up:')
-    console.log(cache)
+    setTimeout(() => {
+        cache.unloadUnusedContent()
+        console.log('Cache after clear up:')
+        console.log(cache)
+    }, 15000)
 }
