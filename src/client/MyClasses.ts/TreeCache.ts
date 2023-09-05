@@ -117,16 +117,8 @@ export class TreeCache<T> {
                 return
             }
 
-            // Set isUsed in true for all siblings
-            let parentNode = foundNode.parent
-            for (const childNode of parentNode.children) {
-                if (childNode.data.isUsed === false) {
-                    childNode.data.isUsed = true
-                    this.usedCount++
-                }
-            }
-
             // Set isUsed in true for all ancestors
+            let parentNode = foundNode.parent
             while (parentNode.parent !== null) {
                 if (parentNode.data.isUsed === false) {
                     parentNode.data.isUsed = true
@@ -154,26 +146,6 @@ export class TreeCache<T> {
                     this.usedCount--
                 }
             })
-
-            // If this node is root - return
-            if (foundNode.parent === null) {
-                return
-            }
-
-            // Set isUsed in false for all siblings
-            let parentNode = foundNode.parent
-            for (const childNode of parentNode.children) {
-                if (childNode.data.isUsed === true) {
-                    childNode.data.isUsed = false
-                    this.usedCount--
-                    this.itemTree.traverseAllChildren(childNode.data, (elem) => {
-                        if (elem.isUsed === true) {
-                            elem.isUsed = false
-                            this.usedCount--
-                        }
-                    })
-                }
-            }
         }
     }
 
@@ -207,6 +179,7 @@ export class TreeCache<T> {
         //  TODO: make this strategy more... sophisticated (check the state of cache)
         let unloadItemsNumber = 0
         while (unloadItemsNumber < nodesToUnload) {
+            //  Stop if only used content remain
             if (this.itemTree.size === this.usedCount) {
                 break
             }

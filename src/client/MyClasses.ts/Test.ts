@@ -61,7 +61,7 @@ export default function test() {
     console.log(root)
 
     //  Cache test
-    const cache = new TreeCache((first: Tile, second: Tile) => first.value - second.value, 13, 9)
+    const cache = new TreeCache((first: Tile, second: Tile) => first.value - second.value, 13, 9, 1)
     const traverseAllChildren = (root: Tile, cb: (tile: Tile) => void) => {
         cb(root)
         for (const child of root.children) {
