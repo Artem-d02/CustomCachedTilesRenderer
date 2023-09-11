@@ -46,7 +46,10 @@ scene.add(mainLight, light_mesh)
 
 const controls = new OrbitControls(camera, renderer.domElement)
 
+setTimeout(() => console.log('TilesRenderer:', tilesRenderer), 0)
 setTimeout(() => console.log('TilesRenderer:', tilesRenderer), 10000)
+setTimeout(() => console.log('TilesRenderer:', tilesRenderer), 20000)
+
 //  Test for tile comparison
 let a = 'this is uri'
 let b = 'this is uri'
