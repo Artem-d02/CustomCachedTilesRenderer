@@ -46,7 +46,7 @@ export class Tree<T> {
             }
         }
         const parentNode = this.search(<T>parent)
-        if (parent === undefined) {
+        if (parentNode === undefined) {
             console.warn('Error: parent was not found')
             return
         }

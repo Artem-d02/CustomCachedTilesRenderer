@@ -71,12 +71,12 @@ export default function test() {
     traverseAllChildren(root, (tile) => cache.add(tile, () => {}))
     console.log('Start cache:')
     console.log(cache)
-    cache.markUnused(root.children[0])
+    //cache.markUnused(root.children[0])
     console.log('Cache after mark unused:')
     console.log(cache)
-    setTimeout(() => {
+    setInterval(() => {
         cache.unloadUnusedContent()
         console.log('Cache after clear up:')
         console.log(cache)
-    }, 15000)
+    }, 1000)
 }

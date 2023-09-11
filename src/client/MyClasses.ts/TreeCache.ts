@@ -1,5 +1,6 @@
 import { flattenJSON } from 'three/src/animation/AnimationUtils'
 import { TreeNode, Tree } from './Tree'
+import { LRUCache } from '3d-tiles-renderer'
 
 enum Consts {
     DEFAULT_MAX_SIZE = 800,
@@ -37,7 +38,7 @@ class ItemWrapper<T> {
     }
 }
 
-export class TreeCache<T> {
+export class TreeCache<T> extends LRUCache {
     maxSize: number
     minSize: number
     unloadPercent: number
@@ -48,12 +49,16 @@ export class TreeCache<T> {
 
     scheduled: Boolean = false
 
+    //  Deprecated!
+    unloadPriorityCallback: any = null
+
     constructor(
         comparator: (first: T, second: T) => number,
         maxSize: number = Consts.DEFAULT_MAX_SIZE,
         minSize: number = Consts.DEFAULT_MIN_SIZE,
         unloadPercent: number = Consts.DEFAULT_UNLOAD_PERCENT
     ) {
+        super()
         this.maxSize = maxSize
         this.minSize = minSize
         this.unloadPercent = unloadPercent
@@ -186,7 +191,6 @@ export class TreeCache<T> {
         let nodesToUnload = Math.min(maxUnload, unused)
         nodesToUnload = Math.ceil(nodesToUnload)
 
-        //  TODO: make this strategy more... sophisticated (check the state of cache)
         let unloadItemsNumber = 0
         while (unloadItemsNumber < nodesToUnload) {
             //  Stop if only used content remain
@@ -217,6 +221,7 @@ export class TreeCache<T> {
             while (unloadItemsNumber < nodesToUnload) {
                 //  If all elements in unusedItemSet were deleted - go to the next outer iteration
                 if (index === unusedItemSet.length) {
+                    //  problem
                     break
                 }
                 const elemInTree = unusedItemSet[index++].wrappedItem

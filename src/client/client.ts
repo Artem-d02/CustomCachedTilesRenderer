@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { TilesRenderer } from '3d-tiles-renderer'
+import { TilesRenderer } from './ChangedTilesRenderer/index'
+//import { TilesRenderer } from '3d-tiles-renderer'
 import { Tile } from '3d-tiles-renderer/src/base/Tile'
 import test from './MyClasses.ts/Test'
 
@@ -45,36 +46,25 @@ scene.add(mainLight, light_mesh)
 
 const controls = new OrbitControls(camera, renderer.domElement)
 
-/*
-const geometry = new THREE.BoxGeometry()
-const material = new THREE.MeshBasicMaterial({
-    color: 0x00ff00,
-    wireframe: true,
-})
-
-const cube = new THREE.Mesh(geometry, material)
-scene.add(cube)
-
-window.addEventListener('resize', onWindowResize, false)
-function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight
-    camera.updateProjectionMatrix()
-    renderer.setSize(window.innerWidth, window.innerHeight)
-    render()
-}
-*/
+setTimeout(() => console.log('TilesRenderer:', tilesRenderer), 10000)
+//  Test for tile comparison
+let a = 'this is uri'
+let b = 'this is uri'
+console.log('a == b:', a == b)
 
 function animate() {
     requestAnimationFrame(animate)
 
     controls.update()
     tilesRenderer.update()
+    //console.log('.update() was called')
 
     render()
+    //console.log('.render() was called')
 }
 
 function render() {
     renderer.render(scene, camera)
 }
 animate()
-test()
+//test()
