@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('path')
 
 module.exports = {
     entry: './src/client/client.ts',
@@ -13,12 +13,12 @@ module.exports = {
     },
     resolve: {
         alias: {
-            three: path.resolve('./node_modules/three')
+            three: path.resolve('./node_modules/three'),
         },
         extensions: ['.tsx', '.ts', '.js'],
     },
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, '../../dist/client'),
-    }
-};
+    },
+}
